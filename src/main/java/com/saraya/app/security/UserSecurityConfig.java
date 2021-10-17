@@ -28,6 +28,7 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().antMatchers("/api").permitAll()
+		.antMatchers("/h2-console").permitAll()
 		.antMatchers("/api/user/**").hasAuthority("USER")
 		.antMatchers("/api/coach/**").hasAuthority("COACH")
 		.anyRequest().authenticated().and().formLogin();

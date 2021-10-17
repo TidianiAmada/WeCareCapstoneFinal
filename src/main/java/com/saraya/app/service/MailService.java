@@ -1,6 +1,6 @@
 package com.saraya.app.service;
 
-import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor; 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -29,10 +29,12 @@ public class MailService {
             MimeMessageHelper helper =
                     new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(email, true);
+            helper.setFrom("admin@saraya.com");
             helper.setTo(to);
             helper.setSubject("Coaching invitation");
-            helper.setFrom("admin@saraya.com");
+            
             mailSender.send(mimeMessage);
+            LOGGER.info("Mail Send for invitation");
         } catch (MessagingException e) {
             LOGGER.error("failed to send email", e);
             throw new IllegalStateException("failed to send email");
