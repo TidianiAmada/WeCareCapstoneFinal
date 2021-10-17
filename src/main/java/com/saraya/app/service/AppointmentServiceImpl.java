@@ -72,7 +72,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 		// how to update
 		rdv.setAppointmentDate(appointment_date);
 		appointmentRepo.save(rdv);
-		mailService.send(rdv.getCoach().getUsername(), null); //TODO build email for updated appointment
+		mailService.send(rdv.getCoach().getUsername(), mailService.buildEmail(rdv.getCoach().getName(), rdv.toString())); //TODO build email for updated appointment
 		return rdv;
 	}
 
@@ -80,7 +80,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 	public void cancelAppointment(Integer booking_id) {
 		Appointment rdv=appointmentRepo.findByBookingId(booking_id);
 		appointmentRepo.delete(rdv);
-		mailService.send(rdv.getCoach().getUsername(), null); //TODO build email for canceling appointment
+		mailService.send(rdv.getCoach().getUsername(), mailService.buildEmail(rdv.getCoach().getName(), rdv.toString())); //TODO build email for canceling appointment
 		
 	}
 
